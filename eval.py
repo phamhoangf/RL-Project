@@ -35,10 +35,10 @@ def eval():
     
     # blue policy
     blue_q_network = QNetwork(
-        env.observation_space("blue_0").shape, env.action_space("blue_0").n
+        env.observation_space("red_0").shape, env.action_space("red_0").n
     )
     blue_q_network.load_state_dict(
-        torch.load("blue_agent (2).pt", weights_only=True, map_location="cpu")['model_state_dict']
+        torch.load("Models/Hoang/blue (4).pt", weights_only=True, map_location="cpu")
     )
     blue_q_network.to(device)
     
@@ -108,7 +108,7 @@ def eval():
     print("Blue policy with random policy")
     print(
         run_eval(
-            env=env, red_policy=random_policy, blue_policy=blue_policy, n_episode=30
+            env=env, red_policy=blue_policy, blue_policy=random_policy, n_episode=30
         )
     )
     print("=" * 20)
@@ -116,7 +116,7 @@ def eval():
     print("Blue policy with trained policy")
     print(
         run_eval(
-            env=env, red_policy=pretrain_policy, blue_policy=blue_policy, n_episode=30
+            env=env, red_policy=blue_policy, blue_policy=pretrain_policy, n_episode=30
         )
     )
     print("=" * 20)
