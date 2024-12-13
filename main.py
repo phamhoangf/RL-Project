@@ -48,7 +48,7 @@ if __name__ == "__main__":
         env.observation_space("red_0").shape, env.action_space("red_0").n
     )
     q_network.load_state_dict(
-        torch.load("Models/Hoang/blue (5).pt", weights_only=True, map_location="cpu")
+        torch.load("Models/Hoang/blue (8).pt", weights_only=True, map_location="cpu")
     )
 
     q_network2 = QNetwork(
@@ -65,7 +65,7 @@ if __name__ == "__main__":
             action = None  # this agent has died
         else:
             agent_handle = agent.split("_")[0]
-            if agent_handle == "red":
+            if agent_handle == "blue":
                 observation = (
                     torch.Tensor(observation).float().permute([2, 0, 1]).unsqueeze(0)
                 )
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
         env.step(action)
 
-        if agent == "red_0":
+        if agent == "blue_80":
             frames.append(env.render())
 
     height, width, _ = frames[0].shape
